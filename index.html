@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신앙 유형 상담 가이드 — 상담자용</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Noto+Sans+KR:wght@300;400;500&display=swap');
+:root{
+  --bg:#F8F6F1;--white:#FFFFFF;--text:#1A1814;--muted:#7A7568;--light:#B0A99E;
+  --border:#E8E3DC;--border-light:#F4F0EB;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* ── TOP BAR ── */
+.topbar{background:var(--white);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-title{font-size:13px;font-weight:500;color:var(--muted);letter-spacing:.3px;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.select-wrap{position:relative;}
+.type-select{appearance:none;-webkit-appearance:none;background:var(--white);border:1px solid var(--border);border-radius:4px;padding:8px 36px 8px 14px;font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;outline:none;min-width:180px;}
+.select-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;width:12px;height:12px;color:var(--light);}
+.btn-print{padding:8px 16px;background:var(--text);color:var(--white);border:none;border-radius:4px;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:500;cursor:pointer;letter-spacing:.3px;}
+
+/* ── MAIN LAYOUT ── */
+.main{max-width:760px;margin:0 auto;padding:32px 24px 80px;}
+
+/* ── COVER ── */
+.cover{padding:40px 40px 36px;background:var(--white);border-radius:8px;border-top:4px solid var(--type-color,#534AB7);margin-bottom:24px;}
+.cover-eyebrow{font-size:10px;font-weight:500;letter-spacing:1.2px;color:var(--light);text-transform:uppercase;margin-bottom:14px;}
+.cover-badge{display:inline-flex;align-items:center;gap:8px;border-radius:4px;padding:7px 14px;margin-bottom:18px;}
+.cover-badge-dot{width:8px;height:8px;border-radius:50%;}
+.cover-badge-text{font-size:12px;font-weight:500;letter-spacing:.3px;}
+.cover-title{font-family:'Noto Serif KR',serif;font-size:26px;font-weight:600;line-height:1.3;margin-bottom:8px;}
+.cover-sub{font-size:14px;color:var(--muted);margin-bottom:24px;}
+.cover-chips{display:flex;flex-wrap:wrap;gap:10px;}
+.chip{font-size:11px;color:var(--muted);background:var(--bg);padding:5px 12px;border-radius:20px;border:1px solid var(--border);}
+
+/* ── TOC ── */
+.toc{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin-bottom:24px;}
+.toc-label{font-size:10px;font-weight:500;letter-spacing:.8px;color:var(--light);text-transform:uppercase;margin-bottom:14px;}
+.toc-list{display:flex;flex-direction:column;gap:7px;}
+.toc-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+.toc-num{font-size:11px;color:var(--light);width:22px;flex-shrink:0;}
+.toc-name{flex:1;}
+.toc-dots{flex:1;border-bottom:1px dotted var(--border);margin:0 4px;}
+.toc-pg{font-size:11px;color:var(--light);width:16px;text-align:right;}
+
+/* ── SECTION WRAPPER ── */
+.section{background:var(--white);border-radius:8px;border:1px solid var(--border);padding:28px 32px;margin-bottom:16px;}
+.sec-num{font-size:10px;font-weight:500;letter-spacing:.8px;color:var(--light);text-transform:uppercase;margin-bottom:6px;}
+.sec-title{font-size:18px;font-weight:600;color:var(--text);margin-bottom:6px;}
+.sec-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:20px;}
+
+/* ── PROFILE GRID ── */
+.profile-box{border-radius:6px;padding:18px 20px;margin-bottom:0;}
+.profile-label{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;margin-bottom:12px;}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.pi{display:flex;flex-direction:column;gap:3px;}
+.pi-label{font-size:11px;}
+.pi-value{font-size:13px;font-weight:500;line-height:1.5;}
+
+/* ── TWO COL CARDS ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0;}
+.card{border-radius:6px;padding:16px 18px;}
+.card-head{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;}
+.card-item{font-size:13px;line-height:1.65;padding-left:12px;position:relative;margin-bottom:5px;color:#444441;}
+.card-item:last-child{margin-bottom:0;}
+.card-item::before{content:'·';position:absolute;left:0;color:#888780;}
+
+/* ── APPROACH TABLE ── */
+.ap-table{width:100%;border-collapse:collapse;font-size:13px;}
+.ap-table th{text-align:left;font-size:10px;font-weight:500;letter-spacing:.5px;color:var(--light);text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--border);}
+.ap-table td{padding:11px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#444441;line-height:1.65;}
+.ap-table tr:last-child td{border-bottom:none;}
+.tag{display:inline-block;font-size:10px;font-weight:500;padding:3px 9px;border-radius:10px;white-space:nowrap;}
+.tag-do{background:#EAF3DE;color:#27500A;}
+.tag-dont{background:#FAECE7;color:#712B13;}
+.ap-table td:first-child{width:60px;padding-right:4px;}
+
+/* ── AXIS INSIGHT ── */
+.axis-list{display:flex;flex-direction:column;gap:10px;}
+.ai-row{display:flex;gap:12px;align-items:flex-start;}
+.ai-badge{font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:1px;min-width:80px;text-align:center;}
+.ai-text{font-size:13px;color:#444441;line-height:1.65;}
+
+/* ── QUESTIONS ── */
+.q-list{display:flex;flex-direction:column;gap:10px;}
+.q-item{background:var(--bg);border-radius:6px;padding:13px 16px 13px 28px;font-size:13px;color:#444441;line-height:1.7;position:relative;}
+.q-item::before{content:'"';position:absolute;left:12px;top:12px;font-size:18px;color:var(--light);font-family:'Noto Serif KR',serif;}
+
+/* ── WATCH BOX ── */
+.watch-box{border-radius:0 6px 6px 0;padding:14px 18px;margin-bottom:12px;}
+.watch-box:last-child{margin-bottom:0;}
+.watch-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;}
+.watch-text{font-size:13px;line-height:1.7;}
+
+/* ── GROWTH GRID ── */
+.growth-box{border-radius:6px;padding:20px 22px;}
+.growth-label{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px;}
+.growth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.gi{display:flex;flex-direction:column;gap:3px;}
+.gi-label{font-size:11px;}
+.gi-value{font-size:13px;font-weight:500;line-height:1.5;}
+
+/* ── SCRIPTURE ── */
+.scripture{text-align:center;padding:28px 24px;border-top:1px solid var(--border);margin-top:16px;}
+.verse{font-family:'Noto Serif KR',serif;font-size:16px;color:var(--text);line-height:1.9;margin-bottom:8px;font-style:italic;white-space:pre-line;}
+.verse-ref{font-size:11px;color:var(--light);}
+
+/* ── FOOTER ── */
+.guide-footer{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.footer-l{font-size:11px;color:var(--light);}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* ── PRINT ── */
+@media print{
+  .topbar{display:none;}
+  .main{max-width:100%;padding:0;margin:0;}
+  body{background:#fff;}
+  .cover,.section,.toc,.guide-footer{border-radius:0;border-left:none;border-right:none;page-break-inside:avoid;}
+  .cover{border-top-width:3px;margin-bottom:0;}
+  .section{margin-bottom:0;border-bottom:1px solid var(--border);}
+  .btn-print{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-title">신앙 유형 상담 가이드 · 상담자용</span>
+  <div class="topbar-right">
+    <div class="select-wrap">
+      <select class="type-select" id="typeSelect" onchange="switchType(this.value)">
+        <option value="0">유형 01 — 뿌리형</option>
+        <option value="1">유형 02 — 씨앗형</option>
+        <option value="2">유형 03 — 터전형</option>
+        <option value="3">유형 04 — 결실형</option>
+        <option value="4">유형 05 — 광야형</option>
+        <option value="5">유형 06 — 탐색형</option>
+        <option value="6">유형 07 — 인내형</option>
+        <option value="7">유형 08 — 준비형</option>
+      </select>
+      <svg class="select-arrow" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <button class="btn-print" onclick="window.print()">인쇄 / PDF</button>
+  </div>
+</div>
+
+<div class="main" id="guideContent"></div>
+
+<script>
+const TYPES = [
+  // ── 0. 뿌리형 ──────────────────────────────
+  {
+    num:'01', name:'뿌리형', sub:'깊이 내린 신앙인',
+    color:'#534AB7', light:'#EEEDFE', dark:'#3C3489',
+    axes:'신성 高 · 인성 高', diff:'중', need:'깊이와 진정성',
+    profile:{
+      욕구:'진정성 있는 신앙, 깊은 말씀 이해',
+      두려움:'겉으로만 신앙인 척 하는 것, 표면적 신앙',
+      동기:'말씀과 삶의 일치, 진리 위에 서고 싶음',
+      스트레스:'완벽주의적 자기 기준 강화, 고립 경향',
+      관계:'신뢰 형성 후 깊은 관계 선호, 표면 관계 불편',
+      성장트리거:'진솔한 공동체 경험, 나눔과 섬김'
+    },
+    strengths:['말씀에 대한 견고한 신뢰','책임감과 신뢰성이 높음','영적 깊이를 향한 갈망','공동체에 대한 헌신','진정성을 감지하는 능력'],
+    cautions:['스스로에게 너무 엄격함','약함을 드러내기 어려워함','번아웃 징후를 무시하는 경향','타인에게 높은 신앙 기준 설정','겉으로는 괜찮아 보임'],
+    approaches:[
+      {tag:'do', how:'먼저 경청하고 판단하지 않음', why:'진정성 있는 공간에서만 속내를 열기 때문'},
+      {tag:'do', how:'강점을 먼저 인정하고 시작', why:'자기 비판 성향이 높아 인정이 신뢰의 출발점'},
+      {tag:'do', how:'쉬어가도 된다는 허락을 줌', why:'성과 지향적 신앙에서 벗어나도록 돕는 핵심 메시지'},
+      {tag:'dont', how:'더 많이 하라는 도전 자제', why:'이미 충분히 하고 있음, 부담만 가중될 수 있음'},
+      {tag:'dont', how:'표면적 칭찬은 오히려 역효과', why:'진정성 감지 능력이 높아 형식적 반응을 간파함'},
+    ],
+    axes_guide:[
+      {axis:'신성 高', bg:'#FAECE7', color:'#712B13', text:'구원 확신과 말씀 신뢰가 견고합니다. 영적 확신을 탐색하기보다 그 확신이 어떻게 삶과 연결되는지를 함께 봅니다.'},
+      {axis:'인성 高', bg:'#E1F5EE', color:'#085041', text:'관계와 성품이 안정적입니다. 그러나 타인을 위해 자신을 소모하는 패턴이 있는지 살펴봅니다.'},
+      {axis:'환경 中↓', bg:'#E6F1FB', color:'#0C447C', text:'외적 지지 환경이 약할 수 있습니다. 가족 관계, 모임 접근성 등 구체적 어려움을 파악합니다.'},
+      {axis:'에너지 低', bg:'#F0EAFE', color:'#4B2E74', text:'변화 에너지가 낮다면 번아웃 가능성을 열어두고 접근합니다. 회복과 쉼을 먼저 다룹니다.'},
+    ],
+    questions:[
+      '요즘 말씀을 대할 때 어떤 감정이 드시나요? 기쁨인가요, 의무감인가요?',
+      '지금 신앙생활에서 가장 힘이 되는 것은 무엇인가요?',
+      '최근에 누군가에게 솔직하게 힘들다고 말해 본 적이 있으신가요?',
+      '스스로에게 아직 허락하지 않은 것이 있다면 무엇일까요?',
+      '지금 이 자리에서 가장 필요한 것이 무엇인지 느껴지시나요?',
+    ],
+    warnings:[
+      {color:'#FCEBEB', border:'#A32D2D', label:'번아웃 위험 신호', labelColor:'#A32D2D', textColor:'#501313', text:'겉으로는 잘 하고 있는 것처럼 보이지만 에너지 점수가 낮게 나타날 경우, 내면이 소진되어 있을 수 있습니다. "괜찮아요"라는 말을 액면 그대로 받아들이지 말고 더 깊은 질문으로 초대하세요.'},
+      {color:'#FFF8F0', border:'#E8A44A', label:'완벽주의 패턴', labelColor:'#854F0B', textColor:'#633806', text:'신앙 기준이 너무 높아 스스로를 항상 부족하게 느낄 수 있습니다. "충분히 잘하고 있다"는 메시지를 상담 전반에 걸쳐 반복적으로 전달합니다.'},
+    ],
+    growth:{
+      단기:'자기 인정과 쉼의 허락. 잘하고 있음을 반복 확인',
+      중기:'공동체 안에서 자연스러운 나눔의 자리 연결',
+      장기:'신앙의 깊이를 일상과 관계로 흘려보내는 것',
+      위험구간:'혼자 모든 것을 감당하려 할 때 — 연결 유지 필요',
+    },
+    verse:'"내게 능력 주시는 자 안에서\n내가 모든 것을 할 수 있느니라"',
+    verseRef:'빌립보서 4:13',
+    scripture_note:'상담 마무리에 함께 나눌 수 있는 말씀입니다.',
+  },
+  // ── 1. 씨앗형 ──────────────────────────────
+  {
+    num:'02', name:'씨앗형', sub:'잠재력이 풍성한 신앙인',
+    color:'#0F6E56', light:'#E1F5EE', dark:'#085041',
+    axes:'인성 高 · 신성 中', diff:'하', need:'성장 가능성 확인',
+    profile:{
+      욕구:'진리를 알고 싶고, 공동체 안에서 의미를 찾고 싶음',
+      두려움:'신앙이 가짜일까 봐, 뿌리 없이 흔들릴까 봐',
+      동기:'관계 속에서 진심을 나누고 싶은 따뜻한 마음',
+      스트레스:'확신 없을 때 방황하거나 주변 영향 받기 쉬움',
+      관계:'먼저 다가가고 따뜻함을 나누는 관계 지향적 성향',
+      성장트리거:'체계적인 말씀 공부와 신뢰할 수 있는 동반자'
+    },
+    strengths:['따뜻하고 개방적인 성품','관계 안에서 신뢰를 잘 쌓음','새로운 것을 배우려는 열린 마음','공동체에 자연스럽게 녹아드는 능력','진심을 나누려는 진정성'],
+    cautions:['말씀 뿌리가 아직 얕아 흔들릴 수 있음','주변 분위기에 쉽게 영향 받음','신앙 확신이 불안정할 수 있음','빠른 답을 원하는 경향','깊은 말씀 씨름 경험 부족'],
+    approaches:[
+      {tag:'do', how:'관계 중심으로 접근, 따뜻하게 시작', why:'이 유형은 관계가 열려야 내용이 들어가기 때문'},
+      {tag:'do', how:'질문을 환영하는 분위기 조성', why:'아직 확신이 없는 것이 자연스럽다는 메시지 필요'},
+      {tag:'do', how:'이미 가진 성품을 신앙 언어로 연결', why:'"당신의 따뜻함이 바로 하나님의 성품"으로 연결'},
+      {tag:'dont', how:'빠른 결단이나 확신 요구 자제', why:'준비 안 된 결단은 오히려 부담이 되고 떠나게 함'},
+      {tag:'dont', how:'많은 내용을 한 번에 전달 자제', why:'한 가지씩 경험하고 느껴가는 방식이 효과적'},
+    ],
+    axes_guide:[
+      {axis:'인성 高', bg:'#E1F5EE', color:'#085041', text:'따뜻한 성품과 관계 능력이 강점입니다. 이것이 이미 신앙의 씨앗임을 인식하도록 도와줍니다.'},
+      {axis:'신성 中', bg:'#FAECE7', color:'#712B13', text:'영적 확신이 형성 중입니다. 확신이 없는 것을 문제로 보지 않고, 탐색 중인 여정으로 함께 바라봅니다.'},
+      {axis:'환경', bg:'#E6F1FB', color:'#0C447C', text:'환경이 지지적일 경우 성장 속도가 빨라집니다. 주변 관계와 모임 환경을 함께 점검합니다.'},
+      {axis:'에너지', bg:'#F0EAFE', color:'#4B2E74', text:'에너지가 높다면 적극적으로 연결하고, 낮다면 부담 없는 작은 참여부터 시작합니다.'},
+    ],
+    questions:[
+      '요즘 신앙에 대해 가장 궁금한 것이 있다면 무엇인가요?',
+      '공동체 안에서 언제 가장 편안함을 느끼시나요?',
+      '말씀 중에 마음에 와닿은 구절이 있었나요? 어떤 것이었나요?',
+      '지금 신앙 여정에서 가장 필요한 것이 무엇이라고 느끼시나요?',
+      '신앙과 관련해서 아직 풀리지 않은 질문이 있으신가요?',
+    ],
+    warnings:[
+      {color:'#FFF8F0', border:'#E8A44A', label:'흔들림 주의', labelColor:'#854F0B', textColor:'#633806', text:'주변 상황이나 관계의 영향을 많이 받을 수 있습니다. 좋지 않은 관계나 환경 변화로 신앙에서 멀어질 위험이 있으므로 연결 상태를 꾸준히 확인합니다.'},
+      {color:'#E1F5EE', border:'#0F6E56', label:'성장 가속 가능성', labelColor:'#085041', textColor:'#085041', text:'체계적인 말씀 공부와 신뢰할 수 있는 동반자가 연결될 경우 빠르게 성장할 수 있는 유형입니다. 적절한 시기에 체계적 학습 기회를 연결해 주세요.'},
+    ],
+    growth:{
+      단기:'질문을 환영하는 안전한 관계 형성, 부담 없는 참여',
+      중기:'체계적인 말씀 공부 연결, 1:1 동반 관계 구축',
+      장기:'말씀이 삶의 기준이 되는 내면의 뿌리 형성',
+      위험구간:'고립되거나 관계가 끊겼을 때 — 주기적 연결 필요',
+    },
+    verse:'"선한 일을 시작하신 이가 그리스도 예수의 날까지\n이루실 줄을 우리는 확신하노라"',
+    verseRef:'빌립보서 1:6',
+    scripture_note:'이 유형에게 "지금 이대로도 충분하다"는 메시지와 함께 나눕니다.',
+  },
+  // ── 2. 터전형 ──────────────────────────────
+  {
+    num:'03', name:'터전형', sub:'주변 환경이 잘 갖추어진 신앙인',
+    color:'#185FA5', light:'#E6F1FB', dark:'#0C447C',
+    axes:'환경 高 · 기반 高', diff:'하', need:'내적 확신으로의 전환',
+    profile:{
+      욕구:'안정적인 환경 속에서 자연스럽게 신앙을 이어가고 싶음',
+      두려움:'환경이 바뀌면 신앙도 흔들릴까 봐',
+      동기:'주변 사람들과 함께하는 신앙생활의 편안함',
+      스트레스:'외적 환경의 변화에 신앙이 흔들릴 수 있음',
+      관계:'지지적 환경 안에서 자연스러운 관계 유지',
+      성장트리거:'"왜 신앙을 가지는가"에 대한 자기 질문'
+    },
+    strengths:['가족과 주변의 지지가 든든함','신앙생활의 외적 여건이 잘 갖추어짐','접근성과 참여 지속성이 높음','경제적·시간적 여유가 있음','신앙 공동체와의 연결이 원활'],
+    cautions:['외적 조건에 의존하는 신앙 가능성','내면의 확신이 아직 형성 중','상황이 좋을 때만 신앙이 활성화될 수 있음','스스로 신앙을 선택했다는 확신 부족','어려운 상황에서의 신앙 검증 미경험'],
+    approaches:[
+      {tag:'do', how:'감사에서 출발하여 내면으로 연결', why:'좋은 환경을 신앙의 출발점으로 자연스럽게 연결 가능'},
+      {tag:'do', how:'"왜 신앙을 선택하는가" 함께 탐색', why:'외적 동기에서 내적 확신으로 이동하는 핵심 질문'},
+      {tag:'do', how:'환경의 변화를 성장 기회로 재해석', why:'흔들림이 와도 신앙이 유지되는 내면 기반 형성을 돕기 위해'},
+      {tag:'dont', how:'지금의 좋은 환경을 당연시하게 두지 않음', why:'감사함이 신앙의 동력이 되도록 의도적으로 연결 필요'},
+      {tag:'dont', how:'말씀 공부 없이 관계 활동만 권유 자제', why:'뿌리 없는 신앙은 환경이 바뀔 때 흔들릴 수 있음'},
+    ],
+    axes_guide:[
+      {axis:'환경 高', bg:'#E6F1FB', color:'#0C447C', text:'외적 조건이 잘 갖추어져 있습니다. 이 환경을 감사하게 인식하고 신앙 성장에 적극 활용하도록 돕습니다.'},
+      {axis:'신성 中', bg:'#FAECE7', color:'#712B13', text:'내면의 신앙 확신은 아직 형성 중입니다. 외적 동기에서 내적 확신으로의 전환이 이 단계의 핵심 과제입니다.'},
+      {axis:'인성', bg:'#E1F5EE', color:'#085041', text:'성품과 관계가 안정적입니다. 그러나 신앙의 이유가 "환경이 좋아서"에 머물지 않도록 함께 탐색합니다.'},
+      {axis:'에너지', bg:'#F0EAFE', color:'#4B2E74', text:'에너지 수준에 따라 새로운 도전의 타이밍을 조율합니다. 여유가 있을 때 말씀 공부를 권유하기 좋습니다.'},
+    ],
+    questions:[
+      '지금 신앙생활을 이어가는 가장 큰 이유는 무엇인가요?',
+      '만약 주변 환경이 지금과 달랐다면 신앙이 어떻게 달라졌을까요?',
+      '말씀 중에 가장 마음에 와닿은 내용이 있다면 나눠주실 수 있나요?',
+      '신앙에서 혼자 결정하고 걸어가야 했던 순간이 있었나요?',
+      '하나님을 개인적으로 만난 경험이 있다면 어떤 순간이었나요?',
+    ],
+    warnings:[
+      {color:'#FFF8F0', border:'#E8A44A', label:'환경 의존 패턴', labelColor:'#854F0B', textColor:'#633806', text:'가족의 지지, 편한 모임 환경 등 외적 조건이 신앙의 주된 이유가 될 경우, 상황이 바뀔 때 신앙도 함께 흔들릴 수 있습니다. 내면의 확신 형성에 지속적으로 초점을 맞추세요.'},
+      {color:'#E6F1FB', border:'#185FA5', label:'성장 기회', labelColor:'#0C447C', textColor:'#0C447C', text:'환경이 좋다는 것은 신앙 성장에 집중하기 좋은 최적의 시기라는 의미이기도 합니다. 말씀 공부와 소그룹 참여를 자연스럽게 연결해 주세요.'},
+    ],
+    growth:{
+      단기:'감사와 외적 환경에 대한 인식, 현재 상태 점검',
+      중기:'내적 확신 형성을 위한 말씀 공부, 개인 신앙 탐색',
+      장기:'"왜 나는 이 신앙을 선택하는가"에 대한 자기 답 형성',
+      위험구간:'환경이 바뀌는 전환기 — 미리 내면 기반 다지기 필요',
+    },
+    verse:'"나를 강하게 하신 그리스도 예수 우리 주께 내가 감사함은\n그가 나를 충성되이 여겨 내게 직분을 맡기심이니"',
+    verseRef:'디모데전서 1:12',
+    scripture_note:'감사와 부르심을 연결하는 말씀으로 함께 나눕니다.',
+  },
+  // ── 3. 결실형 ──────────────────────────────
+  {
+    num:'04', name:'결실형', sub:'삶에서 열매 맺는 신앙인',
+    color:'#3B6D11', light:'#EAF3DE', dark:'#27500A',
+    axes:'전 영역 高', diff:'중', need:'지속과 균형',
+    profile:{
+      욕구:'신앙이 삶 전체와 통합되어 자연스럽게 흐르기를 원함',
+      두려움:'신앙이 삶에서 분리되거나, 성장이 멈추는 것',
+      동기:'일상 속에서 신앙의 열매가 드러나는 삶',
+      스트레스:'균형이 깨지면 자책하는 경향, 정체감',
+      관계:'공동체 안에서 자연스러운 연결과 나눔',
+      성장트리거:'더 깊은 나눔, 새로운 공동체 경험'
+    },
+    strengths:['신앙과 삶의 균형이 잡혀 있음','말씀이 행동으로 이어지는 실천력','공동체에 긍정적 에너지를 줌','정서적 안정감과 성품이 성숙함','신앙 여정에 대한 깊은 통찰'],
+    cautions:['성장이 멈춘 것 같은 정체감 경험 가능','높은 기대치로 자신을 평가할 수 있음','균형이 깨지는 상황에 민감함','영적 침체기를 이상하게 여길 수 있음','외적으로 잘 보이는 것과 내적 갈증 괴리'],
+    approaches:[
+      {tag:'do', how:'지금까지의 여정을 충분히 인정', why:'결실형은 스스로 과소평가하는 경향이 있어 인정이 중요'},
+      {tag:'do', how:'정체감을 자연스러운 신앙의 계절로 재해석', why:'성장 곡선은 직선이 아님, 쉼도 성장의 일부임을 안내'},
+      {tag:'do', how:'더 깊은 나눔의 자리로 초대', why:'이 단계에서는 받는 것보다 나누는 것이 성장 에너지가 됨'},
+      {tag:'dont', how:'새로운 도전을 급하게 제시하지 않음', why:'충분히 쉬고 소화하는 시간이 필요할 수 있음'},
+      {tag:'dont', how:'모든 영역이 높다고 해서 상담 불필요로 판단 금지', why:'내면의 갈증과 피로는 숫자로 보이지 않을 수 있음'},
+    ],
+    axes_guide:[
+      {axis:'전 영역 高', bg:'#EAF3DE', color:'#27500A', text:'네 영역이 균형 잡혀 있습니다. 이 균형을 유지하는 것 자체가 성숙한 신앙임을 인정하고, 지속성에 초점을 맞춥니다.'},
+      {axis:'에너지 점검', bg:'#F0EAFE', color:'#4B2E74', text:'에너지가 낮게 나타났다면 번아웃이나 침체기 여부를 조심스럽게 탐색합니다. "쉬고 싶다"는 신호일 수 있습니다.'},
+      {axis:'신성', bg:'#FAECE7', color:'#712B13', text:'말씀과의 관계가 의무감인지 기쁨인지를 함께 점검합니다. 깊이는 있지만 신선함이 필요할 수 있습니다.'},
+      {axis:'인성', bg:'#E1F5EE', color:'#085041', text:'성품이 성숙해도 내면의 피로나 갈증이 있을 수 있습니다. 겉으로 잘 보이는 것에 속지 않도록 합니다.'},
+    ],
+    questions:[
+      '요즘 신앙이 기쁨인가요, 의무감인가요? 솔직하게 느끼시는 대로 말씀해 주세요.',
+      '지금 신앙 여정에서 가장 감사한 것은 무엇인가요?',
+      '최근에 하나님과 단둘이 대화한 시간이 있었나요?',
+      '지금 이 자리에서 솔직하게 나누고 싶은 것이 있다면 무엇인가요?',
+      '신앙이 가장 생기 있게 느껴졌던 때는 언제였나요?',
+    ],
+    warnings:[
+      {color:'#FFF8F0', border:'#E8A44A', label:'침체기 주의', labelColor:'#854F0B', textColor:'#633806', text:'겉으로는 균형 잡혀 보이지만 내면에서 "더 이상 성장하고 있는가?"라는 의문이 들 수 있습니다. 이것을 신앙의 실패가 아닌 자연스러운 계절로 함께 바라봐 주세요.'},
+      {color:'#FCEBEB', border:'#A32D2D', label:'번아웃 위험', labelColor:'#A32D2D', textColor:'#501313', text:'에너지 점수가 전반적으로 높음에도 불구하고 낮게 나타났다면, 오랫동안 많은 것을 해온 피로가 쌓인 것일 수 있습니다. 쉬어가도 된다는 허락을 반드시 전달하세요.'},
+    ],
+    growth:{
+      단기:'지금까지의 여정 인정, 내면 갈증과 피로 탐색',
+      중기:'새로운 나눔과 연결의 자리 경험, 신앙의 신선함 회복',
+      장기:'신앙의 깊이와 넓이를 동시에 넓혀가는 여정',
+      위험구간:'정체감이 오래 지속될 때 — 새로운 연결이 필요',
+    },
+    verse:'"내가 확신하노니 사망이나 생명이나 천사들이나\n어떤 피조물이라도 우리를 하나님의 사랑에서 끊을 수 없으리라"',
+    verseRef:'로마서 8:38-39',
+    scripture_note:'어떤 상황에서도 하나님의 사랑 안에 있음을 함께 확인하는 말씀입니다.',
+  },
+  // ── 4. 광야형 ──────────────────────────────
+  {
+    num:'05', name:'광야형', sub:'어려운 환경 속에서 신앙을 지켜가는 신앙인',
+    color:'#854F0B', light:'#FAEEDA', dark:'#633806',
+    axes:'환경 低 · 기반 低', diff:'상', need:'공감과 현실적 지지',
+    profile:{
+      욕구:'지금의 어려움에도 불구하고 신앙을 이어가고 싶음',
+      두려움:'상황이 너무 힘들어 신앙을 포기하게 될까 봐',
+      동기:'힘든 중에도 포기하지 않는 내면의 의지',
+      스트레스:'환경적 압박이 신앙에너지를 소모시킴',
+      관계:'관계를 원하지만 상황 때문에 고립될 수 있음',
+      성장트리거:'현실적 문제 해결과 함께하는 한 사람'
+    },
+    strengths:['힘든 상황에서도 신앙을 놓지 않는 의지','삶의 무게를 아는 깊은 공감 능력','진정성 있는 신앙을 향한 간절함','어려움 속에서 단련된 내면의 힘','포기하지 않는 인내'],
+    cautions:['환경적 어려움이 지속되면 지칠 수 있음','고립감과 소외감이 신앙에서 멀어지게 할 수 있음','현실적 도움 없이 영적 격려만 하면 역효과','자책이나 "내 탓"으로 돌리는 경향','작은 어려움에도 크게 흔들릴 수 있음'],
+    approaches:[
+      {tag:'do', how:'판단 전에 충분한 공감 먼저', why:'이 유형은 이해받는다는 느낌이 신뢰의 전제 조건'},
+      {tag:'do', how:'현실적 어려움을 함께 구체적으로 파악', why:'막연한 격려보다 실질적 문제 파악이 더 도움이 됨'},
+      {tag:'do', how:'지금 이 자리에 있는 것 자체를 인정', why:'어려운 상황에서 신앙을 이어가는 것이 이미 대단한 일'},
+      {tag:'dont', how:'영적 도전이나 더 열심히 하라는 권유 자제', why:'지금은 채울 여유가 없는 상태, 오히려 짐이 됨'},
+      {tag:'dont', how:'"믿음이 있으면 상황도 바뀐다" 식의 접근 금지', why:'고통의 현실을 외면하는 것처럼 느껴져 신뢰를 잃음'},
+    ],
+    axes_guide:[
+      {axis:'환경 低', bg:'#E6F1FB', color:'#0C447C', text:'구체적으로 어떤 어려움이 있는지 파악합니다. 재정, 가족 갈등, 이동 어려움 등 실질적 장벽을 함께 봅니다.'},
+      {axis:'신성', bg:'#FAECE7', color:'#712B13', text:'영적 의지와 갈망이 있음을 먼저 확인합니다. 힘든 상황에서 신앙을 붙잡고 있다는 것 자체가 믿음의 증거입니다.'},
+      {axis:'인성', bg:'#E1F5EE', color:'#085041', text:'성품과 관계 능력이 있다면 연결의 자원이 됩니다. 고립되지 않도록 공동체와의 연결을 유지하는 것이 중요합니다.'},
+      {axis:'에너지 低', bg:'#F0EAFE', color:'#4B2E74', text:'에너지가 낮은 것은 환경 때문입니다. 환경이 나아지면 에너지도 회복될 수 있음을 함께 기대합니다.'},
+    ],
+    questions:[
+      '요즘 가장 힘든 것이 무엇인지 말씀해 주실 수 있나요?',
+      '지금 이 상황에서 신앙을 이어가는 이유가 있다면 무엇인가요?',
+      '지금 가장 필요한 도움이 있다면 어떤 것인가요?',
+      '혼자 감당하고 있는 것들이 있다면 나눠주실 수 있나요?',
+      '하나님이 지금 나에게 어떤 분으로 느껴지시나요?',
+    ],
+    warnings:[
+      {color:'#FCEBEB', border:'#A32D2D', label:'이탈 위험 신호', labelColor:'#A32D2D', textColor:'#501313', text:'환경 점수와 에너지 점수가 모두 낮을 경우, 신앙을 포기하려는 마음이 생길 수 있습니다. 공동체와의 연결을 놓치지 않도록 주도적으로 연락하고 챙겨주세요.'},
+      {color:'#FFF8F0', border:'#E8A44A', label:'현실적 지원 필요', labelColor:'#854F0B', textColor:'#633806', text:'영적 격려만으로는 부족합니다. 실질적 어려움(재정, 이동 수단, 가족 갈등 등)에 대한 구체적 도움 방안을 함께 모색하는 것이 필요합니다.'},
+    ],
+    growth:{
+      단기:'현실적 어려움 파악 및 공감, 연결 유지',
+      중기:'환경적 장벽 하나씩 해결, 지지 관계 형성',
+      장기:'어려움 속에서도 흔들리지 않는 신앙 기반 형성',
+      위험구간:'고립될 때, 현실이 너무 힘들 때 — 즉시 연결 필요',
+    },
+    verse:'"야곱아 너를 창조하신 여호와께서 이제 말씀하시느니라\n너는 두려워하지 말라 내가 너를 구속하였고\n내가 너를 지명하여 불렀나니 너는 내 것이라"',
+    verseRef:'이사야 43:1',
+    scripture_note:'광야에서도 이름을 불러주시는 하나님을 함께 기억하는 말씀입니다.',
+  },
+  // ── 5. 탐색형 ──────────────────────────────
+  {
+    num:'06', name:'탐색형', sub:'진리를 찾아 나서고 있는 신앙인',
+    color:'#993C1D', light:'#FAECE7', dark:'#712B13',
+    axes:'신성 低 · 에너지 高', diff:'중', need:'안전한 질문의 공간',
+    profile:{
+      욕구:'진리가 진짜인지 스스로 확인하고 싶음',
+      두려움:'믿다가 나중에 잘못된 것이라는 것을 알게 될까 봐',
+      동기:'지적 탐구심과 진실을 향한 진지한 태도',
+      스트레스:'답을 강요받거나 확신 없이 결단을 요구받을 때',
+      관계:'진정성 있는 관계에서 질문을 나눌 수 있기를 원함',
+      성장트리거:'안전하게 질문할 수 있는 공간과 신뢰할 수 있는 동반자'
+    },
+    strengths:['진리를 향한 진지하고 솔직한 탐구 자세','쉽게 믿지 않는 지적 분별력','한 번 확신이 생기면 깊은 신앙으로 이어질 잠재력','질문을 통해 성장하는 능력','진정성을 중요하게 여기는 태도'],
+    cautions:['신앙 확신이 불안정하여 흔들릴 수 있음','지적 이해 없이는 앞으로 나아가기 어려움','의심이 길어지면 결단이 힘들어질 수 있음','주변의 형식적 신앙 문화에 거부감','답을 강요받으면 오히려 멀어짐'],
+    approaches:[
+      {tag:'do', how:'질문을 환영하고 함께 탐색하는 자세', why:'이 유형은 질문이 막히면 신앙에서 멀어지기 때문'},
+      {tag:'do', how:'확신이 없어도 함께 걸어갈 수 있음을 보여줌', why:'믿음은 이해한 다음에 오는 것이 아님을 경험하도록'},
+      {tag:'do', how:'지적 접근을 존중하고 말씀의 이치 함께 탐구', why:'이 유형에게 논리적 연결이 신뢰의 다리가 됨'},
+      {tag:'dont', how:'빠른 결단이나 "그냥 믿어라" 식 권유 금지', why:'지적 탐구를 차단하면 신뢰 자체가 무너짐'},
+      {tag:'dont', how:'의심을 죄책감과 연결하지 않음', why:'의심이 불신앙이 아님을 명확히 해주어야 함'},
+    ],
+    axes_guide:[
+      {axis:'신성 低', bg:'#FAECE7', color:'#712B13', text:'영적 확신이 아직 형성 중입니다. 이것을 문제로 보지 않고 탐색의 여정으로 함께 바라보는 것이 핵심입니다.'},
+      {axis:'에너지 高', bg:'#F0EAFE', color:'#4B2E74', text:'새로운 것을 향한 내적 에너지가 높습니다. 이 에너지를 신앙 탐색에 연결하면 빠른 성장 가능성이 있습니다.'},
+      {axis:'인성', bg:'#E1F5EE', color:'#085041', text:'관계적 성품이 있다면 신뢰 관계 형성이 수월합니다. 그 관계 안에서 질문을 나누도록 초대합니다.'},
+      {axis:'환경', bg:'#E6F1FB', color:'#0C447C', text:'환경이 지지적일수록 탐색이 안전해집니다. 강압적이지 않고 열린 분위기의 공동체 연결이 중요합니다.'},
+    ],
+    questions:[
+      '신앙에 대해 가장 궁금하거나 이해가 안 되는 것이 있다면 무엇인가요?',
+      '지금까지 신앙에 대해 갖고 있던 이미지는 어떤 것이었나요?',
+      '신앙이 진짜라면 어떤 모습일 것 같다고 생각하시나요?',
+      '지금 이 탐색의 여정에서 가장 필요한 것은 무엇인가요?',
+      '말씀 중에 논리적으로 이해가 됐거나 마음에 와닿은 부분이 있었나요?',
+    ],
+    warnings:[
+      {color:'#FFF8F0', border:'#E8A44A', label:'탐색 장기화 주의', labelColor:'#854F0B', textColor:'#633806', text:'탐색이 너무 길어지면 결단에 이르지 못하고 에너지가 소진될 수 있습니다. 탐색의 속도를 존중하되, 자연스럽게 다음 걸음으로 초대하는 타이밍을 놓치지 마세요.'},
+      {color:'#FAECE7', border:'#993C1D', label:'지적 장벽 주의', labelColor:'#712B13', textColor:'#712B13', text:'지적 이해가 완전히 되어야만 믿을 수 있다는 태도가 강화되면 신앙으로 들어오는 문이 좁아질 수 있습니다. "걸어가면서 이해된다"는 경험을 제공하는 것이 중요합니다.'},
+    ],
+    growth:{
+      단기:'안전한 질문 공간 형성, 신뢰 관계 구축',
+      중기:'말씀을 지적으로 함께 탐구, 작은 경험들 쌓기',
+      장기:'탐색에서 확신으로, 자신만의 신앙 언어 형성',
+      위험구간:'질문이 막히거나 강요받는다고 느낄 때 — 공간 재확인',
+    },
+    verse:'"구하라 그리하면 너희에게 주실 것이요\n찾으라 그리하면 찾아낼 것이요\n문을 두드리라 그리하면 너희에게 열릴 것이니"',
+    verseRef:'마태복음 7:7',
+    scripture_note:'찾는 자에게 반드시 열린다는 약속을 함께 붙잡는 말씀입니다.',
+  },
+  // ── 6. 인내형 ──────────────────────────────
+  {
+    num:'07', name:'인내형', sub:'지쳐 있지만 신앙을 놓지 않는 신앙인',
+    color:'#993556', light:'#FBEAF0', dark:'#72243E',
+    axes:'신성 高 · 에너지 低', diff:'상', need:'회복과 쉼',
+    profile:{
+      욕구:'믿고 싶고 신앙을 이어가고 싶지만, 지쳐 있음',
+      두려움:'지쳐서 신앙을 포기하게 될까 봐',
+      동기:'신앙에 대한 진심과 간절함이 내면 깊이 있음',
+      스트레스:'지침과 소진 상태가 지속될 때 모든 것이 무너지는 느낌',
+      관계:'관계를 원하지만 에너지가 없어 고립될 수 있음',
+      성장트리거:'쉼과 회복, 그리고 안전한 한 사람과의 연결'
+    },
+    strengths:['신앙에 대한 깊은 진심과 간절함','힘든 상황에서도 포기하지 않는 내면의 힘','영적 갈망과 성장 욕구가 있음','연약함을 아는 깊은 공감 능력','진정성을 중요하게 여기는 태도'],
+    cautions:['정서적·신체적 소진 상태일 수 있음','신앙생활 자체가 짐이 되고 있을 수 있음','도움 요청을 어려워하거나 혼자 감당하려 함','"이 정도는 견뎌야 한다"는 자기 강요','관계에서 단절되거나 고립 경향'],
+    approaches:[
+      {tag:'do', how:'공감을 충분히, 판단 없이 먼저', why:'이 유형은 이해받는 경험이 가장 큰 치유가 됨'},
+      {tag:'do', how:'쉬어가도 된다는 허락을 명확히 전달', why:'쉼도 신앙이라는 것을 온몸으로 경험하도록 돕기 위해'},
+      {tag:'do', how:'신앙이 짐이 아니라 안식임을 체험하도록', why:'지친 상태에서 신앙이 더 무거워지는 악순환을 끊기 위해'},
+      {tag:'dont', how:'더 열심히 하라는 도전이나 과제 자제', why:'이미 충분히 하고 있음, 추가 부담은 오히려 해가 됨'},
+      {tag:'dont', how:'"힘든 것이 믿음이 부족해서"라는 연결 금지', why:'죄책감이 소진을 더 심화시키고 신앙에서 멀어지게 함'},
+    ],
+    axes_guide:[
+      {axis:'신성 高', bg:'#FAECE7', color:'#712B13', text:'신앙의 진심이 있습니다. 지쳐 있어도 신앙을 붙잡고 있다는 것 자체가 믿음의 증거임을 반드시 전달합니다.'},
+      {axis:'에너지 低', bg:'#F0EAFE', color:'#4B2E74', text:'변화 에너지가 낮은 것은 소진 상태의 신호입니다. 새로운 도전보다 회복과 쉼에 집중하는 시기입니다.'},
+      {axis:'인성', bg:'#E1F5EE', color:'#085041', text:'인성 점수가 낮다면 정서적 어려움이 있을 수 있습니다. 심리적 안전감과 정서 회복에 먼저 집중합니다.'},
+      {axis:'환경', bg:'#E6F1FB', color:'#0C447C', text:'환경적 압박이 에너지를 소진시키고 있는지 파악합니다. 실질적 어려움이 있다면 함께 해결 방안을 모색합니다.'},
+    ],
+    questions:[
+      '요즘 신앙생활에서 가장 무겁게 느껴지는 것이 무엇인가요?',
+      '마지막으로 편안하고 가볍게 예배드린 것이 언제였나요?',
+      '지금 나에게 가장 필요한 것이 있다면 무엇일까요?',
+      '신앙이 쉬어가도 된다고 허락해 준다면 어떤 기분일 것 같으신가요?',
+      '지금 이 자리에 오신 것 자체가 의미 있다고 느끼시나요?',
+    ],
+    warnings:[
+      {color:'#FCEBEB', border:'#A32D2D', label:'심리적 위기 주의', labelColor:'#A32D2D', textColor:'#501313', text:'에너지와 인성 점수가 모두 낮고, 상담 중 무기력하거나 희망이 없다는 표현이 나올 경우 전문적인 도움이 필요할 수 있습니다. 조심스럽게 전문 상담 연결을 고려하세요.'},
+      {color:'#FFF8F0', border:'#E8A44A', label:'과부하 경고', labelColor:'#854F0B', textColor:'#633806', text:'신앙적 과제나 활동을 추가하는 것이 오히려 상태를 악화시킬 수 있습니다. 지금 단계에서는 빼는 것, 내려놓는 것이 진짜 상담 목표입니다.'},
+    ],
+    growth:{
+      단기:'공감과 쉼의 경험, 짐을 내려놓는 허락',
+      중기:'정서 회복과 관계 연결, 신앙이 안식임을 경험',
+      장기:'내면의 회복에서 출발하는 건강한 신앙 재건',
+      위험구간:'혼자 모든 것을 감당하려 할 때 — 즉시 연결 필요',
+    },
+    verse:'"수고하고 무거운 짐 진 자들아 다 내게로 오라\n내가 너희를 쉬게 하리라\n나는 마음이 온유하고 겸손하니 나의 멍에를 메고 내게 배우라\n그리하면 너희 마음이 쉼을 얻으리니"',
+    verseRef:'마태복음 11:28-29',
+    scripture_note:'신앙이 짐이 아니라 쉼임을 함께 경험하는 말씀입니다.',
+  },
+  // ── 7. 준비형 ──────────────────────────────
+  {
+    num:'08', name:'준비형', sub:'신앙의 첫 걸음을 내딛고 있는 신앙인',
+    color:'#5F5E5A', light:'#F1EFE8', dark:'#444441',
+    axes:'전 영역 中~低', diff:'하', need:'따뜻한 첫 경험',
+    profile:{
+      욕구:'신앙 안에서 안전하고 자연스럽게 첫 걸음을 내딛고 싶음',
+      두려움:'잘 모르는 것이 드러날까 봐, 이상하게 볼까 봐',
+      동기:'호기심과 새로운 것을 향한 열린 마음',
+      스트레스:'너무 많은 것을 한 번에 요구받을 때',
+      관계:'편안하고 자연스러운 관계에서 서서히 열림',
+      성장트리거:'따뜻하고 안전한 첫 경험, 비교 없는 수용'
+    },
+    strengths:['열린 마음과 새로운 것에 대한 호기심','아직 고정된 편견이 적음','성장 가능성이 가장 넓은 단계','순수한 탐색의 자세','첫 경험이 좋으면 빠르게 연결됨'],
+    cautions:['모든 것이 낯설고 어색할 수 있음','첫 경험이 나쁘면 오래 기억될 수 있음','너무 많은 것을 배우려 하면 부담이 됨','비교나 평가에 예민할 수 있음','공동체 문화에 적응 시간이 필요함'],
+    approaches:[
+      {tag:'do', how:'따뜻하고 환영하는 분위기를 먼저 만들기', why:'첫 인상이 이 단계를 결정하는 가장 중요한 요소'},
+      {tag:'do', how:'알아야 할 것보다 경험할 것을 먼저 제공', why:'지식보다 경험이 이 단계의 연결을 만들기 때문'},
+      {tag:'do', how:'작은 참여와 한 걸음씩의 성장을 크게 격려', why:'작은 것도 인정받으면 계속 나아갈 동력이 됨'},
+      {tag:'dont', how:'너무 많은 내용을 한 번에 전달 자제', why:'정보 과부하는 이 단계에서 이탈의 주요 원인'},
+      {tag:'dont', how:'다른 사람과 비교하거나 기준 제시 금지', why:'비교는 부끄러움과 위축을 만들어 연결을 끊음'},
+    ],
+    axes_guide:[
+      {axis:'전 영역 中低', bg:'#F1EFE8', color:'#444441', text:'모든 영역이 형성 초기 단계입니다. 이것은 성장 가능성이 가장 넓다는 의미입니다. 비교하지 않고 지금 이 자리를 인정하는 것이 핵심입니다.'},
+      {axis:'에너지', bg:'#F0EAFE', color:'#4B2E74', text:'에너지 수준에 따라 참여의 속도를 조율합니다. 높다면 적극적으로 연결하고, 낮다면 부담 없는 수준으로 시작합니다.'},
+      {axis:'신성', bg:'#FAECE7', color:'#712B13', text:'영적 확신이 아직 없는 것은 완전히 자연스럽습니다. 확신을 요구하기보다 경험을 쌓는 것에 집중합니다.'},
+      {axis:'환경', bg:'#E6F1FB', color:'#0C447C', text:'환경이 지지적이라면 연결을 적극적으로 활용합니다. 어렵다면 구체적인 장벽을 파악하고 현실적 대안을 함께 찾습니다.'},
+    ],
+    questions:[
+      '처음 신앙에 관심을 갖게 된 계기가 있다면 나눠주실 수 있나요?',
+      '지금까지 공동체 안에서 가장 편안했던 순간이 있었나요?',
+      '신앙에 대해 아직 잘 모르는 것이 있는데, 궁금한 것이 있으신가요?',
+      '지금 이 자리에 오게 된 것이 어떻게 느껴지시나요?',
+      '앞으로 신앙 안에서 경험해보고 싶은 것이 있다면 무엇인가요?',
+    ],
+    warnings:[
+      {color:'#FFF8F0', border:'#E8A44A', label:'첫 경험의 중요성', labelColor:'#854F0B', textColor:'#633806', text:'이 단계에서의 첫 경험은 오래 기억됩니다. 따뜻하지 않거나 비교나 평가를 느끼는 경험은 신앙에서 멀어지는 주요 원인이 됩니다. 모든 구성원이 환영하는 문화를 만드는 것이 중요합니다.'},
+      {color:'#E6F1FB', border:'#5F5E5A', label:'성장 가능성', labelColor:'#444441', textColor:'#444441', text:'이 유형은 가장 빠르게 성장할 수 있는 잠재력을 가지고 있습니다. 올바른 첫 경험과 따뜻한 관계 연결이 이후 신앙 여정의 토대를 결정합니다.'},
+    ],
+    growth:{
+      단기:'따뜻한 환영과 첫 경험, 비교 없는 수용',
+      중기:'기초 말씀 공부와 소그룹 연결, 작은 참여 경험 쌓기',
+      장기:'자신만의 신앙 언어와 정체성 형성',
+      위험구간:'낯설거나 비교받는다고 느낄 때 — 즉시 환영 재확인',
+    },
+    verse:'"너는 내 종이라 내가 너를 택하고 싫어하여 버리지 아니하였노라\n두려워하지 말라 내가 너와 함께함이니라\n나는 네 하나님이 됨이라 내가 너를 굳세게 하리라"',
+    verseRef:'이사야 41:9-10',
+    scripture_note:'하나님이 먼저 택하셨음을 처음 만나는 자리에서 함께 나누는 말씀입니다.',
+  },
+];
+
+function switchType(idx) {
+  const t = TYPES[parseInt(idx)];
+  document.getElementById('guideContent').innerHTML = buildGuide(t);
+  document.documentElement.style.setProperty('--type-color', t.color);
+}
+
+function buildGuide(t) {
+  const profileKeys = Object.keys(t.profile);
+  const profileHTML = profileKeys.map(k => `
+    <div class="pi">
+      <div class="pi-label" style="color:${t.color}">${k}</div>
+      <div class="pi-value" style="color:${t.dark}">${t.profile[k]}</div>
+    </div>`).join('');
+
+  const approachRows = t.approaches.map(a => `
+    <tr>
+      <td><span class="tag tag-${a.tag}">${a.tag === 'do' ? '권장' : '주의'}</span></td>
+      <td>${a.how}</td>
+      <td>${a.why}</td>
+    </tr>`).join('');
+
+  const axisRows = t.axes_guide.map(a => `
+    <div class="ai-row">
+      <span class="ai-badge" style="background:${a.bg};color:${a.color}">${a.axis}</span>
+      <span class="ai-text">${a.text}</span>
+    </div>`).join('');
+
+  const watchHTML = t.warnings.map(w => `
+    <div class="watch-box" style="background:${w.color};border-left:3px solid ${w.border}">
+      <div class="watch-label" style="color:${w.labelColor}">${w.label}</div>
+      <div class="watch-text" style="color:${w.textColor}">${w.text}</div>
+    </div>`).join('');
+
+  const growthKeys = Object.keys(t.growth);
+  const growthHTML = growthKeys.map(k => `
+    <div class="gi">
+      <div class="gi-label" style="color:${t.color}">${k}</div>
+      <div class="gi-value" style="color:${t.dark}">${t.growth[k]}</div>
+    </div>`).join('');
+
+  return `
+  <div class="cover" style="border-top-color:${t.color}">
+    <div class="cover-eyebrow">신앙 유형 상담 가이드 · 상담자용</div>
+    <div class="cover-badge" style="background:${t.light}">
+      <div class="cover-badge-dot" style="background:${t.color}"></div>
+      <span class="cover-badge-text" style="color:${t.dark}">유형 ${t.num} — ${t.name}</span>
+    </div>
+    <div class="cover-title">${t.name} 유형을<br>어떻게 상담할 것인가</div>
+    <div class="cover-sub">${t.sub} · 상담자를 위한 접근 가이드</div>
+    <div class="cover-chips">
+      <span class="chip">주요 축: ${t.axes}</span>
+      <span class="chip">접근 난이도: ${t.diff}</span>
+      <span class="chip">핵심 욕구: ${t.need}</span>
+    </div>
+  </div>
+
+  <div class="toc">
+    <div class="toc-label">이 가이드의 구성</div>
+    <div class="toc-list">
+      ${['유형 프로파일','강점과 주의 지점','상담 접근 원칙','축별 해석 포인트','권장 질문 예시','주의해야 할 패턴','동반 성장 방향'].map((s,i)=>`
+      <div class="toc-item">
+        <span class="toc-num">0${i+1}</span>
+        <span class="toc-name">${s}</span>
+        <span class="toc-dots"></span>
+      </div>`).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">Section 01</div>
+    <div class="sec-title">유형 프로파일</div>
+    <div class="sec-desc">이 유형이 어떤 사람인지 핵심 특징을 먼저 파악합니다. 상담 전 이 페이지를 먼저 읽어두세요.</div>
+    <div class="profile-box" style="background:${t.light}">
+      <div class="profile-label" style="color:${t.color}">핵심 프로파일</div>
+      <div class="profile-grid">${profileHTML}</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">Section 02</div>
+    <div class="sec-title">강점과 주의 지점</div>
+    <div class="sec-desc">이 유형이 가진 자원과 상담 시 놓치기 쉬운 취약 지점을 함께 봅니다.</div>
+    <div class="two-col">
+      <div class="card" style="background:#EAF3DE">
+        <div class="card-head" style="color:#3B6D11">강점 자원</div>
+        ${t.strengths.map(s=>`<div class="card-item">${s}</div>`).join('')}
+      </div>
+      <div class="card" style="background:#FAEEDA">
+        <div class="card-head" style="color:#854F0B">주의 지점</div>
+        ${t.cautions.map(c=>`<div class="card-item">${c}</div>`).join('')}
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">Section 03</div>
+    <div class="sec-title">상담 접근 원칙</div>
+    <div class="sec-desc">이 유형에게 효과적인 상담 방식과 피해야 할 접근법입니다. 상담 현장에서 바로 적용할 수 있습니다.</div>
+    <table class="ap-table">
+      <thead><tr><th></th><th>접근 방식</th><th>이유 / 효과</th></tr></thead>
+      <tbody>${approachRows}</tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">Section 04</div>
+    <div class="sec-title">축별 점수 해석 포인트</div>
+    <div class="sec-desc">방사형 그래프 4개 축(인성·신성·환경·에너지)의 점수 패턴을 상담 언어로 읽는 방법입니다.</div>
+    <div class="axis-list">${axisRows}</div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">Section 05</div>
+    <div class="sec-title">권장 질문 예시</div>
+    <div class="sec-desc">이 유형과의 상담에서 자연스럽게 깊이 들어갈 수 있는 질문들입니다. 그대로 사용하거나 맥락에 맞게 변형하세요.</div>
+    <div class="q-list">
+      ${t.questions.map(q=>`<div class="q-item">${q}</div>`).join('')}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-num">Section 06</div>
+    <div class="sec-title">주의해야 할 패턴</div>
+    <div class="sec-desc">이 유형에서 자주 나타나는 위험 신호와 상담자의 대응 방식입니다.</div>
+    ${watchHTML}
+  </div>
+
+  <div class="section">
+    <div class="sec-num">Section 07</div>
+    <div class="sec-title">동반 성장 방향</div>
+    <div class="sec-desc">이 유형이 다음 단계로 나아가기 위해 상담자가 함께 걸어줄 방향입니다.</div>
+    <div class="growth-box" style="background:${t.light}">
+      <div class="growth-label" style="color:${t.color}">성장 로드맵</div>
+      <div class="growth-grid">${growthHTML}</div>
+    </div>
+    <div class="scripture">
+      <div class="verse">${t.verse}</div>
+      <div class="verse-ref">${t.verseRef} &nbsp;—&nbsp; ${t.scripture_note}</div>
+    </div>
+  </div>
+
+  <div class="guide-footer">
+    <span class="footer-l">신앙 유형 상담 가이드 · 상담자용 · 외부 공개 금지</span>
+    <span class="footer-l">${t.name} | Guide ${t.num}</span>
+  </div>`;
+}
+
+// init
+document.documentElement.style.setProperty('--type-color', TYPES[0].color);
+document.getElementById('guideContent').innerHTML = buildGuide(TYPES[0]);
+</script>
+</body>
+</html>
